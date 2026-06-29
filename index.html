@@ -6,83 +6,109 @@
   <title>Google Ads, SEO & Google My Business – Maurice | Freelancer für digitales Marketing</title>
   <meta name="description" content="Google Ads aufsetzen & betreuen, SEO optimieren, Google My Business aufbauen – als Freelancer ohne Agentur-Overhead. Für Unternehmen im deutschsprachigen Raum." />
   <meta name="robots" content="index, follow" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-   :root {
-  --navy: #e4dfc8;
-  --navy-light: #ddd8c0;
-  --navy-card: #e9e4cf;
-  --accent: #3a5a8a;
-  --accent-glow: rgba(58,90,138,0.15);
-  --white: #1f1e17;
-  --muted: #6b6655;
-  --border: rgba(0,0,0,0.08);
-  --radius: 14px;
-  --transition: 0.22s ease;
-}
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--navy);
-  color: var(--white);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
+    :root {
+      --bg:          #e4dfc8;
+      --bg-section:  #dbd5bc;
+      --bg-card:     #ece7d2;
+      --olive:       #5a6b2a;
+      --olive-lt:    #748535;
+      --olive-dim:   rgba(90,107,42,0.12);
+      --olive-border:rgba(90,107,42,0.22);
+      --red:         #a82d2d;
+      --red-lt:      #c43a3a;
+      --red-dim:     rgba(168,45,45,0.1);
+      --ink:         #1c1a12;
+      --ink-mid:     #3d3a2e;
+      --muted:       #6b6654;
+      --border:      rgba(28,26,18,0.1);
+      --radius:      10px;
+      --t:           0.22s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
     /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      padding: 0 1.5rem;
-      height: 64px;
+      height: 60px;
+      padding: 0 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(11,17,32,0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      background: rgba(228,223,200,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
+      transition: height var(--t), background var(--t);
     }
+
+    nav.scrolled { height: 52px; }
 
     .nav-logo {
+      font-family: 'Syne', sans-serif;
       font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--white);
+      font-weight: 800;
+      color: var(--ink);
       text-decoration: none;
+      letter-spacing: -0.01em;
     }
 
-    .nav-logo span { color: var(--accent); }
+    .nav-logo span { color: var(--olive-lt); }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 2.25rem;
       list-style: none;
+      align-items: center;
     }
 
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.875rem;
+      font-size: 0.825rem;
       font-weight: 500;
-      transition: color var(--transition);
+      position: relative;
+      transition: color var(--t);
     }
 
-    .nav-links a:hover { color: var(--white); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: var(--olive);
+      transition: width var(--t);
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::after { width: 100%; }
 
     .nav-cta {
-      background: var(--accent);
-      color: var(--white) !important;
-      padding: 0.45rem 1.1rem;
-      border-radius: 8px;
+      background: var(--olive) !important;
+      color: #fff !important;
+      padding: 0.42rem 1.1rem !important;
+      border-radius: 6px !important;
       font-weight: 600 !important;
-      transition: opacity var(--transition) !important;
+      transition: background var(--t) !important;
     }
 
-    .nav-cta:hover { opacity: 0.88; color: var(--white) !important; }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--olive-lt) !important; color: #fff !important; }
 
     .nav-burger {
       display: none;
@@ -90,26 +116,24 @@ body {
       gap: 5px;
       cursor: pointer;
       padding: 4px;
+      background: none;
+      border: none;
     }
 
     .nav-burger span {
       display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--white);
+      width: 22px; height: 2px;
+      background: var(--ink);
       border-radius: 2px;
-      transition: var(--transition);
+      transition: var(--t);
     }
 
     /* ── HERO ── */
     #hero {
       min-height: 100dvh;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 6rem 1.5rem 4rem;
+      padding: 7rem 2rem 5rem;
       position: relative;
       overflow: hidden;
     }
@@ -118,299 +142,481 @@ body {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(79,142,247,0.13) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(79,142,247,0.07) 0%, transparent 60%);
+        radial-gradient(ellipse 60% 55% at 20% 60%, rgba(90,107,42,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 40% at 85% 30%, rgba(168,45,45,0.05) 0%, transparent 60%);
       pointer-events: none;
     }
 
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: var(--accent-glow);
-      border: 1px solid rgba(79,142,247,0.3);
-      color: var(--accent);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      padding: 0.35rem 0.9rem;
-      border-radius: 100px;
-      margin-bottom: 1.8rem;
+    /* Geometric circle top-right */
+    .hero-ring {
+      position: absolute;
+      right: -100px; top: 50%;
+      transform: translateY(-50%);
+      width: 580px; height: 580px;
+      border-radius: 50%;
+      border: 1px solid var(--olive-border);
+      pointer-events: none;
+      opacity: 0.6;
     }
 
-    .hero-badge::before { content: '●'; font-size: 0.5rem; }
+    .hero-ring::after {
+      content: '';
+      position: absolute;
+      inset: 70px;
+      border-radius: 50%;
+      border: 1px solid rgba(168,45,45,0.12);
+    }
+
+    .hero-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.6s 0.1s forwards ease;
+    }
+
+    .eyebrow-line {
+      width: 28px; height: 1px;
+      background: var(--olive-lt);
+      flex-shrink: 0;
+    }
+
+    .eyebrow-text {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--olive-lt);
+    }
 
     h1 {
-      font-size: clamp(2rem, 6vw, 3.8rem);
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.4rem);
       font-weight: 800;
-      line-height: 1.12;
+      line-height: 1.06;
       letter-spacing: -0.03em;
-      max-width: 760px;
-      margin-bottom: 1.25rem;
+      max-width: 720px;
+      margin-bottom: 1.75rem;
+      color: var(--ink);
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.65s 0.2s forwards ease;
     }
 
-    h1 em {
-      font-style: normal;
-      color: var(--accent);
-    }
+    h1 .h1-red { color: var(--red); }
 
     .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-size: 1.05rem;
       color: var(--muted);
-      max-width: 520px;
-      margin-bottom: 2.5rem;
-      font-weight: 400;
+      max-width: 480px;
+      margin-bottom: 2.75rem;
+      line-height: 1.75;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.6s 0.32s forwards ease;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.6s 0.44s forwards ease;
     }
 
     .btn-primary {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: var(--accent);
-      color: var(--white);
+      background: var(--olive);
+      color: #fff;
       text-decoration: none;
       font-weight: 700;
-      font-size: 1rem;
-      padding: 0.85rem 2rem;
-      border-radius: 10px;
+      font-size: 0.9rem;
+      padding: 0.82rem 1.8rem;
+      border-radius: 8px;
       border: none;
       cursor: pointer;
-      transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
-      box-shadow: 0 4px 24px rgba(79,142,247,0.35);
+      transition: background var(--t), transform var(--t), box-shadow var(--t);
+      box-shadow: 0 2px 12px rgba(90,107,42,0.25);
     }
 
     .btn-primary:hover {
+      background: var(--olive-lt);
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(79,142,247,0.45);
+      box-shadow: 0 6px 20px rgba(90,107,42,0.3);
     }
 
     .btn-primary:active { transform: translateY(0); }
 
-    .btn-primary svg { width: 16px; height: 16px; }
-
-    .hero-scroll {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
+    .btn-ghost {
+      display: inline-flex;
       align-items: center;
       gap: 0.4rem;
       color: var(--muted);
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      animation: fadeInUp 1s 0.8s both;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color var(--t);
     }
 
-    .scroll-dot {
-      width: 1px;
-      height: 36px;
-      background: linear-gradient(to bottom, var(--accent), transparent);
+    .btn-ghost:hover { color: var(--ink); }
+
+    /* ── SHARED ── */
+    section { padding: 5.5rem 2rem; }
+    .container { max-width: 1080px; margin: 0 auto; }
+
+    .section-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-bottom: 0.65rem;
     }
 
-    /* ── SECTION SHARED ── */
-    section { padding: 5rem 1.5rem; }
+    .eyebrow-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .eyebrow-dot.olive { background: var(--olive-lt); }
+    .eyebrow-dot.red   { background: var(--red); }
 
     .section-label {
-      display: inline-block;
-      font-size: 0.72rem;
+      font-size: 0.67rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
     }
 
+    .section-label.olive { color: var(--olive-lt); }
+    .section-label.red   { color: var(--red); }
+
     .section-title {
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
       font-weight: 800;
       letter-spacing: -0.025em;
-      line-height: 1.2;
-      margin-bottom: 1rem;
+      line-height: 1.12;
+      margin-bottom: 0.75rem;
+      color: var(--ink);
     }
 
     .section-sub {
       color: var(--muted);
-      font-size: 1rem;
-      max-width: 500px;
+      font-size: 0.9rem;
+      max-width: 460px;
+      line-height: 1.75;
     }
 
     .section-header { margin-bottom: 3rem; }
 
-    .container { max-width: 1080px; margin: 0 auto; }
-
     /* ── LEISTUNGEN ── */
-    #leistungen { background: var(--navy-light); }
+    #leistungen { background: var(--bg-section); }
 
-    .cards-grid {
+    .leistungen-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .card {
-      background: var(--navy-card);
+      grid-template-columns: 1.35fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1px;
+      background: var(--border);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 2rem 1.75rem;
-      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
-      position: relative;
       overflow: hidden;
     }
 
-    .card::before {
+    .l-card {
+      background: var(--bg-card);
+      padding: 2rem 1.75rem;
+      position: relative;
+      transition: background var(--t);
+      cursor: default;
+    }
+
+    .l-card:hover { background: #f0ead3; }
+
+    .l-card.l-featured { grid-row: span 2; }
+
+    .l-ghost {
+      position: absolute;
+      top: 1rem; right: 1.5rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 5rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--ink);
+      opacity: 0.04;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .l-icon {
+      font-size: 1.6rem;
+      margin-bottom: 1.25rem;
+      display: block;
+      transition: transform var(--t);
+    }
+
+    .l-card:hover .l-icon { transform: scale(1.1); }
+
+    .l-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.975rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .l-featured .l-title { font-size: 1.15rem; }
+
+    .l-desc {
+      font-size: 0.835rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .l-tag {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.18rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.8rem;
+    }
+
+    .l-filler {
+      display: flex;
+      align-items: flex-end;
+      padding: 1.25rem 1.75rem;
+    }
+
+    .l-filler p {
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── WARUM ICH ── */
+    #warum-ich { background: var(--bg); }
+
+    .warum-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .w-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--t), box-shadow var(--t), border-color var(--t);
+    }
+
+    .w-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-      opacity: 0;
-      transition: opacity var(--transition);
+      background: var(--olive);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--t);
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(79,142,247,0.25);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    .w-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(28,26,18,0.08);
+      border-color: var(--olive-border);
     }
 
-    .card:hover::before { opacity: 1; }
+    .w-card:hover::before { transform: scaleX(1); }
 
-    .card-icon {
-      font-size: 2rem;
+    .w-icon {
+      font-size: 1.5rem;
       margin-bottom: 1rem;
       display: block;
     }
 
-    .card-title {
-      font-size: 1rem;
+    .w-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
       font-weight: 700;
+      color: var(--ink);
       margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
       line-height: 1.3;
     }
 
-    .card-desc {
-      font-size: 0.875rem;
+    .w-desc {
+      font-size: 0.835rem;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
-    .card.card-secondary {
-      border-style: dashed;
-      opacity: 0.85;
+    /* ── FAQ ── */
+    #faq { background: var(--bg-section); }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
     }
 
-    .card.card-secondary .card-title { font-size: 0.95rem; }
+    .faq-item {
+      background: var(--bg-card);
+      padding: 1.75rem;
+      transition: background var(--t);
+    }
 
-    .card-tag {
-      display: inline-block;
-      font-size: 0.65rem;
+    .faq-item:hover { background: #f0ead3; }
+
+    .faq-q {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-glow);
-      border: 1px solid rgba(79,142,247,0.2);
-      padding: 0.2rem 0.55rem;
-      border-radius: 100px;
-      margin-bottom: 0.75rem;
+      color: var(--ink);
+      margin-bottom: 0.65rem;
+      line-height: 1.3;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+
+    .faq-q-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--olive-dim);
+      border: 1px solid var(--olive-border);
+      color: var(--olive);
+      font-size: 0.65rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .faq-a {
+      font-size: 0.835rem;
+      color: var(--muted);
+      line-height: 1.75;
+      padding-left: 1.65rem;
     }
 
     /* ── KONTAKT ── */
-    #kontakt { background: var(--navy); }
+    #kontakt { background: var(--bg); }
 
     .kontakt-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 5rem;
       align-items: start;
     }
 
-    .kontakt-info h2 { margin-bottom: 1rem; }
+    .kontakt-info .section-title { margin-bottom: 1rem; }
 
-    .kontakt-info p {
+    .kontakt-info > p {
       color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
     }
 
     .contact-card {
-      background: var(--navy-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
       display: flex;
       align-items: center;
       gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       text-decoration: none;
-      color: var(--white);
-      transition: border-color var(--transition), transform var(--transition);
-      margin-bottom: 1rem;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      transition: border-color var(--t), transform var(--t), box-shadow var(--t);
     }
 
     .contact-card:hover {
-      border-color: rgba(79,142,247,0.3);
-      transform: translateX(4px);
+      border-color: var(--olive-border);
+      transform: translateX(3px);
+      box-shadow: 0 4px 16px rgba(28,26,18,0.06);
     }
 
-    .contact-card-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--accent-glow);
-      border-radius: 10px;
+    .cc-icon {
+      width: 38px; height: 38px;
+      background: var(--olive-dim);
+      border: 1px solid var(--olive-border);
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.1rem;
+      font-size: 1rem;
       flex-shrink: 0;
     }
 
-    .contact-card-label {
-      font-size: 0.72rem;
+    .cc-label {
+      font-size: 0.64rem;
       color: var(--muted);
-      margin-bottom: 0.15rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .contact-card-value {
       font-weight: 600;
-      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.1rem;
     }
 
-    .cal-link {
+    .cc-value { font-weight: 600; font-size: 0.875rem; }
+
+    .cal-btn {
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      background: linear-gradient(135deg, rgba(79,142,247,0.15), rgba(79,142,247,0.05));
-      border: 1px solid rgba(79,142,247,0.3);
+      padding: 1rem 1.25rem;
+      background: var(--olive-dim);
+      border: 1px solid var(--olive-border);
       border-radius: var(--radius);
-      padding: 1.25rem 1.5rem;
+      color: var(--ink);
       text-decoration: none;
-      color: var(--white);
       font-weight: 600;
-      font-size: 0.95rem;
-      transition: background var(--transition), transform var(--transition);
-      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      margin-top: 1.25rem;
+      transition: background var(--t), transform var(--t);
     }
 
-    .cal-link:hover {
-      background: linear-gradient(135deg, rgba(79,142,247,0.25), rgba(79,142,247,0.1));
+    .cal-btn:hover {
+      background: rgba(90,107,42,0.18);
       transform: translateY(-2px);
     }
 
-    .cal-link svg { flex-shrink: 0; }
-
     /* ── FORM ── */
     .form-card {
-      background: var(--navy-card);
+      background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 2rem;
+      padding: 1.75rem;
     }
 
     .form-row {
@@ -419,52 +625,51 @@ body {
       gap: 1rem;
     }
 
-    .form-group {
-      margin-bottom: 1.25rem;
-    }
+    .form-group { margin-bottom: 1.1rem; }
 
     label {
       display: block;
-      font-size: 0.78rem;
-      font-weight: 600;
+      font-size: 0.67rem;
+      font-weight: 700;
       color: var(--muted);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.45rem;
     }
 
     input[type="text"],
     input[type="email"],
     textarea {
       width: 100%;
-      background: rgba(255,255,255,0.04);
+      background: rgba(28,26,18,0.04);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--white);
+      border-radius: 7px;
+      color: var(--ink);
       font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      padding: 0.72rem 0.95rem;
       outline: none;
-      transition: border-color var(--transition), background var(--transition);
+      transition: border-color var(--t), background var(--t);
       -webkit-appearance: none;
     }
 
-    input::placeholder, textarea::placeholder { color: rgba(139,154,177,0.5); }
-
-    input:focus, textarea:focus {
-      border-color: rgba(79,142,247,0.5);
-      background: rgba(79,142,247,0.04);
+    input::placeholder, textarea::placeholder {
+      color: rgba(107,102,84,0.45);
     }
 
-    textarea { resize: vertical; min-height: 110px; }
+    input:focus, textarea:focus {
+      border-color: var(--olive-border);
+      background: rgba(90,107,42,0.04);
+    }
 
-    /* Topic slider/toggle */
+    textarea { resize: vertical; min-height: 105px; }
+
     .topic-toggle {
       display: flex;
-      background: rgba(255,255,255,0.04);
+      background: rgba(28,26,18,0.05);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 4px;
+      border-radius: 8px;
+      padding: 3px;
       gap: 2px;
       overflow-x: auto;
       scrollbar-width: none;
@@ -474,62 +679,74 @@ body {
 
     .topic-btn {
       flex: 1;
-      min-width: 80px;
+      min-width: 76px;
       white-space: nowrap;
       background: transparent;
       border: none;
       color: var(--muted);
       font-family: 'Inter', sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       font-weight: 600;
-      padding: 0.5rem 0.6rem;
-      border-radius: 7px;
+      padding: 0.45rem 0.5rem;
+      border-radius: 6px;
       cursor: pointer;
-      transition: background var(--transition), color var(--transition);
-      letter-spacing: 0.01em;
+      transition: background var(--t), color var(--t);
     }
 
     .topic-btn.active {
-      background: var(--accent);
-      color: var(--white);
-      box-shadow: 0 2px 10px rgba(79,142,247,0.3);
+      background: var(--olive);
+      color: #fff;
+    }
+
+    .topic-btn:not(.active):hover {
+      background: rgba(28,26,18,0.07);
+      color: var(--ink);
     }
 
     .btn-submit {
       width: 100%;
       margin-top: 0.5rem;
-      font-size: 0.95rem;
-      padding: 0.9rem;
       justify-content: center;
+      background: var(--red);
+      font-size: 0.9rem;
+      padding: 0.9rem;
+      box-shadow: 0 2px 12px rgba(168,45,45,0.2);
+    }
+
+    .btn-submit:hover {
+      background: var(--red-lt);
+      box-shadow: 0 6px 20px rgba(168,45,45,0.28);
     }
 
     .form-success {
       display: none;
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem;
     }
 
     .form-success-icon {
-      width: 56px;
-      height: 56px;
-      background: rgba(79,142,247,0.15);
+      width: 52px; height: 52px;
+      background: var(--olive-dim);
+      border: 1px solid var(--olive-border);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       margin: 0 auto 1rem;
     }
 
-    .form-success h3 { margin-bottom: 0.5rem; font-size: 1.1rem; }
-    .form-success p { color: var(--muted); font-size: 0.9rem; }
+    .form-success h3 {
+      font-family: 'Syne', sans-serif;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-success p { color: var(--muted); font-size: 0.875rem; }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--navy-light);
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 1.5rem;
-      text-align: center;
+      background: var(--olive);
+      padding: 2.5rem 2rem;
     }
 
     .footer-inner {
@@ -542,13 +759,15 @@ body {
     }
 
     .footer-logo {
+      font-family: 'Syne', sans-serif;
       font-size: 1rem;
-      font-weight: 700;
-      color: var(--white);
+      font-weight: 800;
+      color: #fff;
       text-decoration: none;
+      letter-spacing: -0.01em;
     }
 
-    .footer-logo span { color: var(--accent); }
+    .footer-logo span { color: rgba(255,255,255,0.55); }
 
     .footer-links {
       display: flex;
@@ -557,243 +776,247 @@ body {
     }
 
     .footer-links a {
-      color: var(--muted);
+      color: rgba(255,255,255,0.6);
       text-decoration: none;
-      font-size: 0.8rem;
-      transition: color var(--transition);
+      font-size: 0.775rem;
+      transition: color var(--t);
     }
 
-    .footer-links a:hover { color: var(--white); }
+    .footer-links a:hover { color: #fff; }
 
-    .footer-copy {
-      color: var(--muted);
-      font-size: 0.78rem;
-    }
+    .footer-copy { color: rgba(255,255,255,0.45); font-size: 0.72rem; }
 
     /* ── ANIMATIONS ── */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .fade-in {
+    .reveal {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(22px);
       transition: opacity 0.55s ease, transform 0.55s ease;
     }
 
-    .fade-in.visible {
+    .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .hero-content > * {
-      animation: fadeInUp 0.7s ease both;
-    }
-
-    .hero-content .hero-badge { animation-delay: 0s; }
-    .hero-content h1         { animation-delay: 0.1s; }
-    .hero-content .hero-sub  { animation-delay: 0.2s; }
-    .hero-content .btn-primary { animation-delay: 0.3s; }
+    .reveal-delay-1 { transition-delay: 0.07s; }
+    .reveal-delay-2 { transition-delay: 0.14s; }
+    .reveal-delay-3 { transition-delay: 0.21s; }
+    .reveal-delay-4 { transition-delay: 0.28s; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
+    @media (max-width: 860px) {
+      .leistungen-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .l-card.l-featured {
+        grid-column: span 2;
+        grid-row: span 1;
+      }
+      .l-filler { display: none; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .kontakt-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .warum-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
       .nav-links { display: none; }
       .nav-links.open {
         display: flex;
         flex-direction: column;
         position: fixed;
-        top: 64px; left: 0; right: 0;
-        background: var(--navy-light);
+        top: 60px; left: 0; right: 0;
+        background: rgba(228,223,200,0.97);
+        backdrop-filter: blur(12px);
         border-bottom: 1px solid var(--border);
-        padding: 1.5rem;
+        padding: 1.5rem 2rem;
         gap: 1.25rem;
       }
       .nav-links.open .nav-cta { width: fit-content; }
       .nav-burger { display: flex; }
-
-      .kontakt-grid {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-      }
-
-      .form-row { grid-template-columns: 1fr; }
-
       section { padding: 3.5rem 1.25rem; }
-
-      .hero-scroll { display: none; }
+      .leistungen-grid { grid-template-columns: 1fr; }
+      .l-card.l-featured { grid-column: span 1; }
+      .form-row { grid-template-columns: 1fr; }
+      h1 { letter-spacing: -0.02em; }
     }
 
-    @media (max-width: 480px) {
-      .cards-grid { grid-template-columns: 1fr; }
-      .topic-btn { font-size: 0.72rem; padding: 0.45rem 0.5rem; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-eyebrow, .hero-inner h1, .hero-sub, .hero-actions {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- NAV -->
-  <nav>
+  <nav id="mainNav">
     <a href="#hero" class="nav-logo">Maurice<span>.</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#leistungen">Leistungen</a></li>
-      <li><a href="#kontakt">Kontakt</a></li>
+      <li><a href="#warum-ich">Über mich</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#kontakt" class="nav-cta">Termin buchen</a></li>
     </ul>
-    <div class="nav-burger" id="navBurger" aria-label="Menü" role="button" tabindex="0">
+    <button class="nav-burger" id="navBurger" aria-label="Menü öffnen">
       <span></span><span></span><span></span>
-    </div>
+    </button>
   </nav>
 
   <!-- HERO -->
   <section id="hero">
     <div class="hero-bg"></div>
-    <div class="hero-content">
-   <span class="hero-badge">Freelancer für digitales Marketing</span>
-<h1>Google Ads, SEO &amp;<br /><em>Google My Business</em> –<br />mehr Anfragen für dein Unternehmen.</h1>
-<p class="hero-sub">
-  Kein Agentur-Overhead, kein Vertragszwang – ich betreue Unternehmen im 
-  deutschsprachigen Raum dabei, bei Google gefunden zu werden und mehr 
-  Anfragen zu generieren.
-</p>
-      <a href="#kontakt" class="btn-primary">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="1" y="3" width="14" height="10" rx="1.5"/><path d="M1 3l7 5.5L15 3"/>
-        </svg>
-        Jetzt Termin buchen
-      </a>
-    </div>
-    <div class="hero-scroll">
-      <div class="scroll-dot"></div>
-      <span>Scroll</span>
+    <div class="hero-ring"></div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">Freelancer für digitales Marketing</span>
+      </div>
+      <h1>Google Ads, SEO &amp;<br><span class="h1-red">Google My Business</span> –<br>mehr Anfragen für dein Unternehmen.</h1>
+      <p class="hero-sub">
+        Ich übernehme Google Ads, SEO und Google My Business für Unternehmen im deutschsprachigen Raum. Du bekommst einen direkten Ansprechpartner der mitdenkt, schnell reagiert und Ergebnisse liefert die messbar sind.
+      </p>
+      <div class="hero-actions">
+        <a href="#kontakt" class="btn-primary">
+          Jetzt Termin buchen
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/>
+          </svg>
+        </a>
+        <a href="#leistungen" class="btn-ghost">
+          Was ich mache
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="8" y1="3" x2="8" y2="13"/><polyline points="4 9 8 13 12 9"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </section>
-  <!-- WARUM ICH -->
-<section id="warum-ich">
-  <div class="container">
-    <div class="section-header fade-in">
-      <span class="section-label">Warum ich</span>
-      <h2 class="section-title">Was den Unterschied macht.</h2>
-      <p class="section-sub">Viele bieten digitales Marketing an. Hier ist was bei mir anders ist.</p>
-    </div>
-    <div class="cards-grid fade-in">
-      <div class="card">
-        <span class="card-icon">🎯</span>
-        <p class="card-title">Einer der liefert, kein Team das verwaltet</p>
-        <p class="card-desc">Du arbeitest direkt mit mir. Keine Weiterleitungen, kein Account Manager der deine Kampagne nur vom Hörensagen kennt. Ich kenne dein Business und ich setze um.</p>
-      </div>
-      <div class="card">
-        <span class="card-icon">📊</span>
-        <p class="card-title">Messbar oder es zählt nicht</p>
-        <p class="card-desc">Ich arbeite datenbasiert. Was nicht messbar ist interessiert mich nicht. Du siehst genau was dein Budget bewirkt, wann es wirkt und wo wir nachbessern.</p>
-      </div>
-      <div class="card">
-        <span class="card-icon">🤖</span>
-        <p class="card-title">KI als Werkzeug, nicht als Ausrede</p>
-        <p class="card-desc">Ich nutze KI-Tools aktiv um schneller, besser und effizienter zu arbeiten. Das bedeutet für dich weniger Aufwand, kürzere Umsetzungszeiten und Texte die wirklich ranken.</p>
-      </div>
-      <div class="card">
-        <span class="card-icon">🌍</span>
-        <p class="card-title">Deutschsprachiger Raum, remote</p>
-        <p class="card-desc">Ich arbeite mit Unternehmen aus Deutschland, Österreich und der Schweiz zusammen, vollständig remote. Kurze Abstimmungen, schnelle Umsetzung, keine langen Meetings.</p>
-      </div>
-    </div>
-  </div>
-</section>
-  <!-- FAQ -->
-<section id="faq">
-  <div class="container">
-    <div class="section-header fade-in">
-      <span class="section-label">FAQ</span>
-      <h2 class="section-title">Häufige Fragen.</h2>
-      <p class="section-sub">Die Fragen die ich am öftesten bekomme, ehrlich beantwortet.</p>
-    </div>
-    <div class="faq-list fade-in">
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Was kostet die Zusammenarbeit?
-        </button>
-        <div class="faq-a">
-          <p>Das hängt vom Umfang ab. Google Ads Betreuung startet typischerweise ab einem monatlichen Fixbetrag, SEO-Projekte oft als Einmalpaket oder Retainer. In einem kurzen Erstgespräch schaue ich mir deine Situation an und mache dir ein konkretes Angebot.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Wie lange dauert es bis ich Ergebnisse sehe?
-        </button>
-        <div class="faq-a">
-          <p>Bei Google Ads oft innerhalb weniger Wochen. SEO braucht länger, in der Regel 3 bis 6 Monate bis spürbare Verbesserungen sichtbar werden. Ich sage dir von Anfang an ehrlich was realistisch ist.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Kann ich monatlich kündigen?
-        </button>
-        <div class="faq-a">
-          <p>Ja. Ich arbeite ohne lange Vertragsbindungen. Eine Mindestlaufzeit von 2 bis 3 Monaten macht Sinn damit Maßnahmen überhaupt wirken können, danach bist du frei.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Was ist der Unterschied zu einer Agentur?
-        </button>
-        <div class="faq-a">
-          <p>Bei einer Agentur wirst du oft weitergereicht. Du sprichst mit dem Vertrieb, dann mit einem Account Manager, und die Arbeit macht am Ende jemand anderes. Bei mir hast du einen direkten Ansprechpartner der selbst umsetzt.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Werde ich auch in ChatGPT oder Perplexity gefunden?
-        </button>
-        <div class="faq-a">
-          <p>Genau das ist GEO Optimierung. Immer mehr Leute suchen nicht mehr nur auf Google sondern fragen direkt KI-Tools. Ich optimiere Inhalte so dass dein Unternehmen auch dort als relevante Antwort auftaucht.</p>
-        </div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">
-          Kann ich Google Ads nicht einfach selbst schalten?
-        </button>
-        <div class="faq-a">
-          <p>Technisch ja. Aber Google Ads ist komplex und falsche Einstellungen verbrennen Budget schnell. Die meisten Unternehmer die es selbst probiert haben kommen zu mir weil die Ergebnisse ausblieben.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
   <!-- LEISTUNGEN -->
   <section id="leistungen">
     <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-label">Was ich anbiete</span>
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <div class="eyebrow-dot olive"></div>
+          <span class="section-label olive">Was ich anbiete</span>
+        </div>
         <h2 class="section-title">Leistungen</h2>
         <p class="section-sub">Von der Kampagne bis zum Text – alles aus einer Hand, ohne Agentur-Overhead.</p>
       </div>
-      <div class="cards-grid">
-        <div class="card fade-in">
-  <span class="card-icon">🎯</span>
-  <p class="card-title">Google Ads Betreuung</p>
-  <p class="card-desc">Kampagnen aufsetzen, optimieren und laufend betreuen – damit dein Budget in Anfragen und Umsatz fließt, nicht in Streuverluste. Ohne Agentur-Overhead, mit direktem Ansprechpartner.</p>
-</div>
+      <div class="leistungen-grid">
+        <div class="l-card l-featured reveal">
+          <div class="l-ghost">01</div>
+          <span class="l-icon">🎯</span>
+          <p class="l-title">Google Ads Betreuung</p>
+          <p class="l-desc">Kampagnen aufsetzen, optimieren und laufend betreuen – damit dein Budget in Anfragen und Umsatz fließt, nicht in Streuverluste. Du hast einen direkten Ansprechpartner der dein Business kennt und selbst umsetzt.</p>
+        </div>
+        <div class="l-card reveal reveal-delay-1">
+          <span class="l-icon">🌐</span>
+          <p class="l-title">SEO &amp; GEO Optimierung</p>
+          <p class="l-desc">Deine Website besser bei Google platzieren – und zusätzlich in KI-gestützten Suchen wie ChatGPT oder Perplexity sichtbar werden. SEO 2025 geht weiter als klassische Rankings.</p>
+        </div>
+        <div class="l-card reveal reveal-delay-2">
+          <span class="l-icon">✍️</span>
+          <p class="l-title">Copywriting &amp; Content</p>
+          <p class="l-desc">Webseitentexte, Blogartikel und Anzeigentexte die nicht nur gut klingen – sondern keyword-stark sind und Besucher zu Anfragen machen.</p>
+        </div>
+        <div class="l-card reveal reveal-delay-3">
+          <span class="l-tag">Zusatzleistung</span>
+          <span class="l-icon">🤖</span>
+          <p class="l-title">Google My Business &amp; KI-Coaching</p>
+          <p class="l-desc">Google Unternehmensprofil aufbauen und optimieren für mehr lokale Sichtbarkeit. Plus: KI-Tools sinnvoll in den Arbeitsalltag integrieren.</p>
+        </div>
+        <div class="l-card l-filler reveal reveal-delay-4">
+          <p>Alle Leistungen können einzeln oder als Paket gebucht werden.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="card fade-in">
-  <span class="card-icon">🌐</span>
-  <p class="card-title">SEO & GEO Optimierung</p>
-  <p class="card-desc">Deine Website besser bei Google platzieren – und zusätzlich in KI-gestützten Suchen wie ChatGPT oder Perplexity sichtbar werden. SEO 2025 geht weiter als klassische Rankings.</p>
-</div>
+  <!-- WARUM ICH -->
+  <section id="warum-ich">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <div class="eyebrow-dot olive"></div>
+          <span class="section-label olive">Warum ich</span>
+        </div>
+        <h2 class="section-title">Was den Unterschied macht.</h2>
+        <p class="section-sub">Viele bieten digitales Marketing an. Hier ist was bei mir anders ist.</p>
+      </div>
+      <div class="warum-grid">
+        <div class="w-card reveal">
+          <span class="w-icon">🎯</span>
+          <p class="w-title">Einer der liefert, kein Team das verwaltet</p>
+          <p class="w-desc">Du arbeitest direkt mit mir. Keine Weiterleitungen, kein Account Manager der deine Kampagne nur vom Hörensagen kennt. Ich kenne dein Business und ich setze um.</p>
+        </div>
+        <div class="w-card reveal reveal-delay-1">
+          <span class="w-icon">📊</span>
+          <p class="w-title">Messbar oder es zählt nicht</p>
+          <p class="w-desc">Ich arbeite datenbasiert. Was nicht messbar ist interessiert mich nicht. Du siehst genau was dein Budget bewirkt, wann es wirkt und wo wir nachbessern.</p>
+        </div>
+        <div class="w-card reveal reveal-delay-2">
+          <span class="w-icon">🤖</span>
+          <p class="w-title">KI als Werkzeug, nicht als Ausrede</p>
+          <p class="w-desc">Ich nutze KI-Tools aktiv um schneller und effizienter zu arbeiten. Das bedeutet für dich kürzere Umsetzungszeiten und Texte die wirklich ranken.</p>
+        </div>
+        <div class="w-card reveal reveal-delay-3">
+          <span class="w-icon">🌍</span>
+          <p class="w-title">Deutschsprachiger Raum, vollständig remote</p>
+          <p class="w-desc">Ich arbeite mit Unternehmen aus Deutschland, Österreich und der Schweiz zusammen. Kurze Abstimmungen, schnelle Umsetzung, keine langen Meetings.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="card fade-in">
-  <span class="card-icon">✍️</span>
-  <p class="card-title">Copywriting & Content</p>
-  <p class="card-desc">Webseitentexte, Blogartikel und Anzeigentexte die nicht nur gut klingen – sondern keyword-stark sind und Besucher zu Anfragen machen.</p>
-</div>
-
-<div class="card card-secondary fade-in">
-  <span class="card-tag">Zusatzleistung</span>
-  <span class="card-icon">🤖</span>
-  <p class="card-title">Google My Business & KI-Coaching</p>
-  <p class="card-desc">Google Unternehmensprofil aufbauen und optimieren für mehr lokale Sichtbarkeit. Plus: KI-Tools sinnvoll in den Arbeitsalltag integrieren – praktisch, nicht theoretisch.</p>
-</div>
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">
+          <div class="eyebrow-dot red"></div>
+          <span class="section-label red">Häufige Fragen</span>
+        </div>
+        <h2 class="section-title">Was Kunden wissen wollen.</h2>
+        <p class="section-sub">Die Fragen die ich am öftesten bekomme, ehrlich beantwortet.</p>
+      </div>
+      <div class="faq-grid reveal">
+        <div class="faq-item">
+          <p class="faq-q"><span class="faq-q-mark">?</span>Was kostet die Zusammenarbeit?</p>
+          <p class="faq-a">Das hängt vom Umfang ab. Google Ads Betreuung startet typischerweise ab einem monatlichen Fixbetrag, SEO-Projekte oft als Einmalpaket oder Retainer. In einem kurzen Erstgespräch schaue ich mir deine Situation an und mache dir ein konkretes Angebot.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q"><span class="faq-q-mark">?</span>Wie lange dauert es bis ich Ergebnisse sehe?</p>
+          <p class="faq-a">Bei Google Ads oft innerhalb weniger Wochen. SEO braucht länger, in der Regel 3 bis 6 Monate bis spürbare Verbesserungen sichtbar werden. Ich sage dir von Anfang an ehrlich was realistisch ist.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q"><span class="faq-q-mark">?</span>Kann ich monatlich kündigen?</p>
+          <p class="faq-a">Ja. Ich arbeite ohne lange Vertragsbindungen. Eine Mindestlaufzeit von 2 bis 3 Monaten macht Sinn damit Maßnahmen überhaupt wirken können, danach bist du frei.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q"><span class="faq-q-mark">?</span>Was ist der Unterschied zu einer Agentur?</p>
+          <p class="faq-a">Bei einer Agentur wirst du oft weitergereicht. Du sprichst mit dem Vertrieb, dann mit einem Account Manager, und die Arbeit macht am Ende jemand anderes. Bei mir hast du einen direkten Ansprechpartner der selbst umsetzt.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q"><span class="faq-q-mark">?</span>Werde ich auch in ChatGPT oder Perplexity gefunden?</p>
+          <p class="faq-a">Genau das ist GEO Optimierung. Immer mehr Leute suchen nicht mehr nur auf Google sondern fragen direkt KI-Tools. Ich optimiere Inhalte so dass dein Unternehmen auch dort als relevante Antwort auftaucht.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-q"><span class="faq-q-mark">?</span>Kann ich Google Ads nicht einfach selbst schalten?</p>
+          <p class="faq-a">Technisch ja. Aber Google Ads ist komplex und falsche Einstellungen verbrennen Budget schnell. Die meisten Unternehmer die es selbst probiert haben kommen zu mir weil die Ergebnisse ausblieben.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -802,24 +1025,22 @@ body {
   <section id="kontakt">
     <div class="container">
       <div class="kontakt-grid">
-        <div class="kontakt-info fade-in">
-          <span class="section-label">Kontakt</span>
+        <div class="kontakt-info reveal">
+          <div class="section-eyebrow" style="margin-bottom:0.65rem;">
+            <div class="eyebrow-dot red"></div>
+            <span class="section-label red">Kontakt</span>
+          </div>
           <h2 class="section-title">Lass uns reden.</h2>
-          <p>
-            Kein unverbindliches Kennenlerngespräch mit viel Bla-Bla –
-            sondern ein kurzes, konkretes Gespräch darüber, was bei dir gerade nicht funktioniert und wie ich helfen kann.
-          </p>
-
+          <p>Kein langes Kennenlerngespräch mit viel Bla-Bla – sondern ein kurzes, konkretes Gespräch darüber, was bei dir gerade nicht funktioniert und wie ich helfen kann.</p>
           <a href="mailto:hello@maurice.de" class="contact-card">
-            <div class="contact-card-icon">✉️</div>
+            <div class="cc-icon">✉️</div>
             <div>
-              <p class="contact-card-label">E-Mail</p>
-              <p class="contact-card-value">hello@maurice.de</p>
+              <p class="cc-label">E-Mail</p>
+              <p class="cc-value">hello@maurice.de</p>
             </div>
           </a>
-
-          <a href="#" class="cal-link" id="calLink">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <a href="#" class="cal-btn" id="calLink">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="4" width="18" height="18" rx="2"/>
               <line x1="16" y1="2" x2="16" y2="6"/>
               <line x1="8" y1="2" x2="8" y2="6"/>
@@ -828,8 +1049,7 @@ body {
             Direkt Termin buchen →
           </a>
         </div>
-
-        <div class="fade-in">
+        <div class="reveal reveal-delay-1">
           <div class="form-card">
             <form id="contactForm">
               <div class="form-row">
@@ -861,17 +1081,17 @@ body {
                 <textarea id="message" name="message" placeholder="Beschreib kurz deine Situation oder Herausforderung…"></textarea>
               </div>
               <button type="submit" class="btn-primary btn-submit">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                Anfrage senden
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="22" y1="2" x2="11" y2="13"/>
                   <polygon points="22 2 15 22 11 13 2 9 22 2"/>
                 </svg>
-                Anfrage senden
               </button>
             </form>
             <div class="form-success" id="formSuccess">
               <div class="form-success-icon">✓</div>
               <h3>Nachricht erhalten!</h3>
-              <p>Ich melde mich innerhalb von 24 Stunden bei dir. Bis gleich!</p>
+              <p>Ich melde mich innerhalb von 24 Stunden bei dir.</p>
             </div>
           </div>
         </div>
@@ -892,23 +1112,21 @@ body {
   </footer>
 
   <script>
-    // ── Burger menu ──
+    // Nav burger
     const burger = document.getElementById('navBurger');
     const navLinks = document.getElementById('navLinks');
-
-    burger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-    });
-
-    burger.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') navLinks.classList.toggle('open');
-    });
-
+    burger.addEventListener('click', () => navLinks.classList.toggle('open'));
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => navLinks.classList.remove('open'));
     });
 
-    // ── Scroll observer (fade-in) ──
+    // Nav shrink on scroll
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // Scroll reveal
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -916,17 +1134,13 @@ body {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.fade-in').forEach((el, i) => {
-      el.style.transitionDelay = `${i * 0.07}s`;
-      observer.observe(el);
-    });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // ── Topic toggle ──
+    // Topic toggle
     const topicBtns = document.querySelectorAll('.topic-btn');
     const topicInput = document.getElementById('topic');
-
     topicBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         topicBtns.forEach(b => b.classList.remove('active'));
@@ -935,32 +1149,20 @@ body {
       });
     });
 
-    // ── Form submit ──
+    // Form submit
     const form = document.getElementById('contactForm');
     const success = document.getElementById('formSuccess');
-
     form.addEventListener('submit', e => {
       e.preventDefault();
-      // Placeholder: replace with actual form handler (Formspree, Netlify Forms, etc.)
       form.style.display = 'none';
       success.style.display = 'block';
     });
 
-    // ── Cal link placeholder ──
+    // Cal link
     document.getElementById('calLink').addEventListener('click', e => {
       e.preventDefault();
       alert('Kalender-Link hier einfügen – z.B. Calendly oder Cal.com');
     });
-
-    // ── Smooth nav shrink on scroll ──
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 40) {
-        nav.style.height = '54px';
-      } else {
-        nav.style.height = '64px';
-      }
-    }, { passive: true });
   </script>
 </body>
 </html>
