@@ -23,12 +23,21 @@
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
   body{
-    background:var(--cream);
+    background-color:var(--cream);
+    background-image: radial-gradient(rgba(43,42,31,0.08) 1px, transparent 1px);
+    background-size:22px 22px;
     color:var(--ink);
     font-family:'Source Serif 4', serif;
     font-size:17px;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    position:relative;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    opacity:0.35;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
   }
   .wrap{max-width:1100px; margin:0 auto; padding:0 28px;}
   h1,h2,h3{font-family:'Syne', sans-serif; font-weight:700; letter-spacing:-0.01em; color:var(--olive-deep);}
@@ -146,6 +155,23 @@
     .card-ads,.card-seo,.card-ai,.card-copy{grid-column:span 1;}
   }
 
+  /* ACCORDION DETAIL ON SERVICE CARDS */
+  .card[data-card]{cursor:pointer; padding-right:60px;}
+  .card-toggle{
+    position:absolute; top:28px; right:26px;
+    font-family:'JetBrains Mono',monospace; color:var(--ochre); font-size:18px;
+    transition:transform .25s;
+  }
+  .card-ai .card-toggle{color:var(--ochre-soft);}
+  .card.open .card-toggle{transform:rotate(45deg);}
+  .card-detail{max-height:0; overflow:hidden; transition:max-height .4s ease;}
+  .card.open .card-detail{margin-top:18px;}
+  .detail-item{display:flex; gap:12px; padding:12px 0; border-top:1px solid var(--line);}
+  .card-ai .detail-item{border-top-color:rgba(243,239,227,0.2);}
+  .detail-item .d-icon{font-size:20px; flex-shrink:0;}
+  .detail-item strong{font-family:'Syne',sans-serif; font-size:14.5px; display:block; margin-bottom:3px;}
+  .detail-item p{font-size:14px; opacity:0.75; margin:0;}
+
   /* WHY */
   .why-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
   .why-item{background:var(--cream); padding:34px 28px;}
@@ -243,26 +269,49 @@
       <p>Von der Kampagne bis zur KI-Strategie – alles aus einer Hand, ohne Agentur-Overhead und ohne Weiterleitungen.</p>
     </div>
     <div class="bento">
-      <div class="card card-ads">
+      <div class="card card-ads" data-card>
         <span class="num">01</span>
         <h3>🎯 Google Ads Betreuung</h3>
         <p>Kampagnen aufsetzen, optimieren und laufend betreuen, damit dein Budget in Anfragen fließt statt in Streuverluste.</p>
+        <span class="card-toggle">+</span>
+        <div class="card-detail">
+          <div class="detail-item"><span class="d-icon">🔍</span><div><strong>Keyword- & SERP-Analyse</strong><p>Wo deine Kunden wirklich suchen, nicht wo du es vermutest.</p></div></div>
+          <div class="detail-item"><span class="d-icon">⚙️</span><div><strong>Kampagnen-Setup</strong><p>Saubere Struktur, klare Zielgruppen, keine Streuverluste von Anfang an.</p></div></div>
+          <div class="detail-item"><span class="d-icon">📈</span><div><strong>Laufende Optimierung</strong><p>Wöchentliches Reporting, Anpassung nach echten Zahlen.</p></div></div>
+        </div>
       </div>
-      <div class="card card-seo">
+      <div class="card card-seo" data-card>
         <span class="num">02</span>
         <h3>🌐 SEO & GEO Optimierung</h3>
         <p>Bessere Platzierung bei Google und Sichtbarkeit in KI-Suchen wie ChatGPT oder Perplexity. SEO 2025 hört nicht bei Rankings auf.</p>
+        <span class="card-toggle">+</span>
+        <div class="card-detail">
+          <div class="detail-item"><span class="d-icon">📄</span><div><strong>Technisches & inhaltliches SEO</strong><p>Meta-Tags, Struktur, Inhalte, die Google und Nutzer gleichermaßen verstehen.</p></div></div>
+          <div class="detail-item"><span class="d-icon">🤖</span><div><strong>GEO für KI-Suchen</strong><p>Inhalte so aufbereitet, dass sie als Antwort in ChatGPT & Co. auftauchen.</p></div></div>
+          <div class="detail-item"><span class="d-icon">📍</span><div><strong>Google My Business</strong><p>Lokale Sichtbarkeit für Unternehmen mit Standort.</p></div></div>
+        </div>
       </div>
-      <div class="card card-ai">
+      <div class="card card-ai" data-card>
         <span class="num">03</span>
         <h3>🤖 KI-Consulting</h3>
         <p>Strategieberatung, wie KI sinnvoll in deinem Unternehmen ankommt, plus Workshops fürs Team und KI-Tools, die im Marketing-Alltag wirklich helfen statt nur zu beeindrucken.</p>
         <div class="tags"><span>Strategie</span><span>Team-Workshops</span><span>Tools im Alltag</span></div>
+        <span class="card-toggle">+</span>
+        <div class="card-detail">
+          <div class="detail-item"><span class="d-icon">🧭</span><div><strong>Strategieberatung</strong><p>Wo KI in deinem Unternehmen den größten Hebel hat, statt überall ein bisschen.</p></div></div>
+          <div class="detail-item"><span class="d-icon">👥</span><div><strong>Team-Workshops</strong><p>Praxisnah, kein Theorie-Seminar, sondern Tools, die danach wirklich genutzt werden.</p></div></div>
+          <div class="detail-item"><span class="d-icon">🛠️</span><div><strong>Tools im Alltag</strong><p>Automatisierung von Reporting, Content-Produktion und wiederkehrenden Aufgaben.</p></div></div>
+        </div>
       </div>
-      <div class="card card-copy">
+      <div class="card card-copy" data-card>
         <span class="num">04</span>
         <h3>✍️ Copywriting</h3>
         <p>Texte, die ranken und Besucher zu Anfragen machen.</p>
+        <span class="card-toggle">+</span>
+        <div class="card-detail">
+          <div class="detail-item"><span class="d-icon">🌐</span><div><strong>Webseitentexte</strong><p>Klar, keyword-stark, auf Conversion ausgelegt.</p></div></div>
+          <div class="detail-item"><span class="d-icon">📰</span><div><strong>Blogartikel & Anzeigen</strong><p>Inhalte, die sowohl Google als auch echte Leser überzeugen.</p></div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -400,6 +449,22 @@
       const isOpen = item.classList.contains('open');
       document.querySelectorAll('.faq-item').forEach(o=>{ o.classList.remove('open'); o.querySelector('.faq-a').style.maxHeight=null; });
       if(!isOpen){ item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+    });
+  });
+
+  // Service card accordion
+  document.querySelectorAll('[data-card]').forEach(card=>{
+    const detail = card.querySelector('.card-detail');
+    card.addEventListener('click', ()=>{
+      const isOpen = card.classList.contains('open');
+      document.querySelectorAll('[data-card]').forEach(c=>{
+        c.classList.remove('open');
+        c.querySelector('.card-detail').style.maxHeight = null;
+      });
+      if(!isOpen){
+        card.classList.add('open');
+        detail.style.maxHeight = detail.scrollHeight + 'px';
+      }
     });
   });
 </script>
