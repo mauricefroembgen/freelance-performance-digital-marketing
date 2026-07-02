@@ -381,7 +381,7 @@
         <p style="opacity:0.82; margin-top:16px; max-width:42ch;">Kein langes Kennenlerngespräch mit viel Bla-Bla, sondern ein kurzes, konkretes Gespräch darüber, was bei dir gerade nicht funktioniert und wie ich helfen kann.</p>
         <a class="mail" href="mailto:hello@maurice.de">hello@maurice.de</a>
       </div>
-      <form onsubmit="event.preventDefault();">
+      <form id="contactForm" onsubmit="handleSubmit(event);">
         <div class="field"><label>Name</label><input type="text" placeholder="Max Mustermann"></div>
         <div class="field"><label>E-Mail</label><input type="email" placeholder="max@firma.de"></div>
         <div class="field"><label>Firma</label><input type="text" placeholder="Musterfirma GmbH"></div>
@@ -467,6 +467,27 @@
       }
     });
   });
+  // Formular absenden
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const formData = {
+      name: e.target.querySelector('input[type="text"]').value,
+      email: e.target.querySelector('input[type="email"]').value,
+      firma: e.target.querySelectorAll('input[type="text"]')[1].value,
+      topic: e.target.querySelector('select').value,
+      message: e.target.querySelector('textarea').value
+    };
+    const res = await fetch('https://script.google.com/macros/s/AKfycbzL5-PqUkgmJBw1etBO_RI9kb7jq5oJpinwi-pmX7uhOB-jlNdUfD5aEsHil7E1r5xVLA/exec', {
+      method: 'POST',
+      body: JSON.stringify(formData),
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const result = await res.json();
+    if (result.success) {
+      e.target.innerHTML = '<p style="color:var(--ochre-soft); font-family:JetBrains Mono,monospace; text-align:center; padding:2rem;">✓ Nachricht erhalten – ich melde mich bald!</p>';
+    }
+  }
+</script>
 </script>
 
 </body>
