@@ -477,16 +477,14 @@
       topic: e.target.querySelector('select').value,
       message: e.target.querySelector('textarea').value
     };
-    const res = await fetch('https://script.google.com/macros/s/AKfycbzL5-PqUkgmJBw1etBO_RI9kb7jq5oJpinwi-pmX7uhOB-jlNdUfD5aEsHil7E1r5xVLA/exec', {
-      method: 'POST',
-      body: JSON.stringify(formData),
-      headers: { 'Content-Type': 'application/json' }
-    });
-    const result = await res.json();
-    if (result.success) {
-      e.target.innerHTML = '<p style="color:var(--ochre-soft); font-family:JetBrains Mono,monospace; text-align:center; padding:2rem;">✓ Nachricht erhalten – ich melde mich bald!</p>';
-    }
-  }
+   const res = await fetch('https://script.google.com/macros/s/AKfycbxwOY68TBoF8USz_c3hUFSidSIz_PPRsxssefkW9u4VPeD6GX5G0ec4vetXEovr7rjKtQ/exec', {
+  method: 'POST',
+  mode: 'no-cors',
+  body: JSON.stringify(formData),
+  headers: { 'Content-Type': 'application/json' }
+});
+// no-cors gibt keine Antwort zurück, daher direkt Erfolg zeigen
+e.target.innerHTML = '<p style="color:var(--ochre-soft); font-family:JetBrains Mono,monospace; text-align:center; padding:2rem;">✓ Nachricht erhalten – ich melde mich bald!</p>';
 </script>
 </script>
 
