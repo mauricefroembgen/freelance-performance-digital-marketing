@@ -372,34 +372,34 @@
   </div>
 </section>
 
-<section id="kontakt">
-  <div class="wrap">
-    <div class="contact">
-      <div>
-        <span class="eyebrow" style="opacity:0.7;">Kontakt</span>
-        <h2>Lass uns reden.</h2>
-        <p style="opacity:0.82; margin-top:16px; max-width:42ch;">Kein langes Kennenlerngespräch mit viel Bla-Bla, sondern ein kurzes, konkretes Gespräch darüber, was bei dir gerade nicht funktioniert und wie ich helfen kann.</p>
-        <a class="mail" href="mailto:hello@maurice.de">hello@maurice.de</a>
-      </div>
-      <form onsubmit="event.preventDefault();">
-        <div class="field"><label>Name</label><input type="text" placeholder="Max Mustermann"></div>
-        <div class="field"><label>E-Mail</label><input type="email" placeholder="max@firma.de"></div>
-        <div class="field"><label>Firma</label><input type="text" placeholder="Musterfirma GmbH"></div>
-        <div class="field">
-          <label>Thema</label>
-          <select>
-            <option>Google Ads</option>
-            <option>SEO / GEO</option>
-            <option>Copywriting</option>
-            <option>KI-Consulting</option>
-          </select>
-        </div>
-        <div class="field"><label>Nachricht</label><textarea placeholder="Beschreib kurz deine Situation oder Herausforderung…"></textarea></div>
-        <button class="submit-btn" type="submit">Anfrage senden</button>
-      </form>
-    </div>
+<form action="https://formspree.io/f/mykqqngv" method="POST">
+  <div class="field">
+    <label>Name</label>
+    <input type="text" name="name" placeholder="Max Mustermann" required>
   </div>
-</section>
+  <div class="field">
+    <label>E-Mail</label>
+    <input type="email" name="email" placeholder="max@firma.de" required>
+  </div>
+  <div class="field">
+    <label>Firma</label>
+    <input type="text" name="firma" placeholder="Musterfirma GmbH">
+  </div>
+  <div class="field">
+    <label>Thema</label>
+    <select name="thema">
+      <option>Google Ads</option>
+      <option>SEO / GEO</option>
+      <option>Copywriting</option>
+      <option>KI-Consulting</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Nachricht</label>
+    <textarea name="nachricht" placeholder="Beschreib kurz deine Situation oder Herausforderung…" required></textarea>
+  </div>
+  <button class="submit-btn" type="submit">Anfrage senden</button>
+</form>
 
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
